@@ -1,4 +1,6 @@
 extends layouts/main
 
 block content
-    h1 Upload
+    each item in videos
+        h1= item.title
+        p= item.description 
