@@ -1,11 +1,9 @@
 doctype html
 html
     head
-        title WeTube
+        title | #{siteName}
     body
-        header
-            h1 WeTube
+        include ../partials/header
         main
             block content
-        footer
-            span &copy; WeTube 
+        include ../partials/footer
