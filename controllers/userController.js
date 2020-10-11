@@ -86,7 +86,7 @@ export const userDetail = async (req, res) => {
   }
 };
 
-export const getEditProfile = (req, res) => res.render("editProfile");
+export const getEditProfile = (req, res) => res.render("editProfile", {pageTitle: "Edit Profile"});
 
 export const postEditProfile = async (req, res) => {
   const {
@@ -105,7 +105,7 @@ export const postEditProfile = async (req, res) => {
   }
 };
 
-export const getChangePassword = (req, res) => res.render("changePassword");
+export const getChangePassword = (req, res) => res.render("changePassword", { pageTitle: "Change Password"});
 
 export const postChangePassword = async (req, res) => {
   const {
