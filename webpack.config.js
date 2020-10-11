@@ -56,7 +56,10 @@ const config = {
     new MiniCssExtractPlugin({
       filename: 'styles.css'
     }),
-  ]
+  ],
+  devServer: {
+    historyApiFallback: true
+  }
 };
 
 module.exports = config;
