@@ -12,34 +12,34 @@ export const home = async (req, res) => {
   }
 };
 
-export const search = async(req, res) => {
-    const {
-      query: { term: searchingBy }
-    } = req;
-    let videos = [];
+export const search = async (req, res) => {
+  const {
+    query: { term: searchingBy },
+  } = req;
+  let videos = [];
   try {
     videos = await Video.find({
-      title: { $regex: searchingBy, $options: "i" }
+      title: { $regex: searchingBy, $options: "i" },
     });
   } catch (error) {
     console.log(error);
   }
   res.render("search", { pageTitle: "Search", searchingBy, videos });
-  };
-  
+};
 
-export const getUpload = (req, res) => res.render("upload", { pageTitle: "Upload" });
+export const getUpload = (req, res) =>
+  res.render("upload", { pageTitle: "Upload" });
 
-export const postUpload = async(req, res) => {
+export const postUpload = async (req, res) => {
   const {
-    body: {  title, description },
-    file: {path}
+    body: { title, description },
+    file: { path },
   } = req;
   const newVideo = await Video.create({
     fileUrl: path,
     title,
     description,
-    creator: req.user.id
+    creator: req.user.id,
   });
   req.user.videos.push(newVideo.id);
   req.user.save();
@@ -48,7 +48,7 @@ export const postUpload = async(req, res) => {
 
 export const videoDetail = async (req, res) => {
   const {
-    params: { id }
+    params: { id },
   } = req;
   try {
     const video = await Video.findById(id).populate("creator");
@@ -60,11 +60,11 @@ export const videoDetail = async (req, res) => {
 
 export const getEditVideo = async (req, res) => {
   const {
-    params: { id }
+    params: { id },
   } = req;
   try {
     const video = await Video.findById(id);
-    console.log(video.creator, req.user.id)
+    console.log(video.creator, req.user.id);
     if (video.creator == req.user.id) {
       res.render("editVideo", { pageTitle: `Edit ${video.title}`, video });
     } else {
@@ -78,7 +78,7 @@ export const getEditVideo = async (req, res) => {
 export const postEditVideo = async (req, res) => {
   const {
     params: { id },
-    body: { title, description }
+    body: { title, description },
   } = req;
   try {
     await Video.findOneAndUpdate({ _id: id }, { title, description });
@@ -90,7 +90,7 @@ export const postEditVideo = async (req, res) => {
 
 export const deleteVideo = async (req, res) => {
   const {
-    params: { id }
+    params: { id },
   } = req;
   try {
     const video = await Video.findById(id);
@@ -100,7 +100,23 @@ export const deleteVideo = async (req, res) => {
       await Video.findOneAndRemove({ _id: id });
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
   res.redirect(routes.home);
+};
+
+export const postRegisterView = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+  try {
+    const video = await Video.findById(id);
+    video.views += 1;
+    video.save();
+    res.status(200);
+  } catch (error) {
+    res.status(400);
+  } finally {
+    res.end();
+  }
 };
