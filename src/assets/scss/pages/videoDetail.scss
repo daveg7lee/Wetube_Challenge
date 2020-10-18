@@ -48,11 +48,36 @@
     .video__comments-list {
       margin-top: 50px;
       li {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         background-color: #3498db;
         color: white;
         padding: 15px;
         border-radius: 20px;
         border-bottom-left-radius: 0px;
+        button {
+          padding: 0;
+          position: absolute;
+          right: 10px;
+          background-color: white;
+          text-align: center;
+          width: 30px;
+          height: 30px;
+          opacity: 0;
+        }
+        button:hover {
+          animation: buttonAnimation 0.1s ease-in-out forwards;
+        }
+        @keyframes buttonAnimation {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
         &:not(:last-child) {
           margin-bottom: 15px;
         }
