@@ -67,9 +67,9 @@ export const getEditVideo = async (req, res) => {
   try {
     const video = await Video.findById(id);
     if (String(video.creator) !== req.user.id) {
-      res.render("editVideo", { pageTitle: `Edit ${video.title}`, video });
-    } else {
       throw Error();
+    } else {
+      res.render("editVideo", { pageTitle: `Edit ${video.title}`, video });
     }
   } catch (error) {
     res.redirect(routes.home);
