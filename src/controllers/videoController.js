@@ -99,6 +99,8 @@ export const deleteVideo = async (req, res) => {
       throw Error();
     } else {
       await Video.findOneAndRemove({ _id: id });
+      req.user.videos.remove(id);
+      req.user.save();
     }
   } catch (error) {
     console.log(error);
