@@ -1,6 +1,7 @@
 import passport from "passport";
 import routes from "../routes";
 import User from "../models/User";
+import Video from "../models/Video";
 
 export const getJoin = (req, res) => {
   res.render("join", { pageTitle: "Join" });
@@ -77,8 +78,17 @@ export const logout = (req, res) => {
   res.redirect(routes.home);
 };
 
-export const getMe = (req, res) => {
-  res.render("userDetail", { pageTitle: "User Detail", user: req.user });
+export const getMe = async (req, res) => {
+  let videos = [];
+  for (const i in req.user.videos) {
+    const video = await Video.findById(req.user.videos[i]);
+    videos.push(video);
+  }
+  res.render("userDetail", {
+    pageTitle: "User Detail",
+    user: req.user,
+    videos,
+  });
 };
 
 export const userDetail = async (req, res) => {

@@ -16,7 +16,7 @@ block content
                 a(href=`/users${routes.changePassword}`)
                     button 🔒 Change Password 
         .home-videos
-            each item in user.videos 
+            each item in videos
                 +videoBlock({
                     id:item.id,
                     title:item.title,
