@@ -28,7 +28,7 @@ export const uploadVideo = multerVideo.single("videoFile");
 export const uploadAvatar = multerAvatar.single("avatar");
 
 export const localsMiddleware = (req, res, next) => {
-  res.locals.siteName = "WeTube";
+  res.locals.siteName = "DicsTube";
   res.locals.routes = routes;
   res.locals.loggedUser = req.user || null;
   next();
