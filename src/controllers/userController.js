@@ -40,6 +40,37 @@ export const postLogin = passport.authenticate("local", {
   failureFlash: "Can't log in. Check email and/or password",
 });
 
+export const naverLoginCallback = async (_, __, profile, cb) => {
+  const {
+    _json: { id, name, email },
+  } = profile;
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      user.naverId = id;
+      user.save();
+      return cb(null, user);
+    }
+    const newUser = await User.create({
+      email,
+      name,
+      naverId: id,
+    });
+    return cb(null, newUser);
+  } catch (error) {
+    return cb(error);
+  }
+};
+
+export const naverLogin = passport.authenticate("naver", {
+  successFlash: "Welcome",
+  failureFlash: "Can't log in at this time, try again",
+});
+
+export const postNaverLogin = (req, res) => {
+  res.redirect(routes.home);
+};
+
 export const googleLoginCallback = async (_, __, profile, cb) => {
   const {
     _json: { id, picture: avatarUrl, name, email },

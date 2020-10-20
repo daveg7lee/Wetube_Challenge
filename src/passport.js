@@ -1,10 +1,12 @@
 import passport from "passport";
 import GithubStrategy from "passport-github";
 import GoogleStrategy from "passport-google-oauth20";
+import NaverStrategy from "passport-naver";
 import User from "./models/User";
 import {
   githubLoginCallback,
   googleLoginCallback,
+  naverLoginCallback,
 } from "./controllers/userController";
 import routes from "./routes";
 
@@ -33,6 +35,19 @@ passport.use(
         : `http://localhost:4000${routes.googleCallback}`,
     },
     googleLoginCallback
+  )
+);
+
+passport.use(
+  new NaverStrategy(
+    {
+      clientID: process.env.NAVER_KEY,
+      clientSecret: process.env.NAVER_SECRET,
+      callbackURL: process.env.PRODUCTION
+        ? `https://dicstube.herokuapp.com${routes.naverCallback}`
+        : `http://localhost:4000${routes.naverCallback}`,
+    },
+    naverLoginCallback
   )
 );
 

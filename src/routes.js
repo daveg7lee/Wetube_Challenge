@@ -27,6 +27,9 @@ const GITHUB_CALLBACK = "/auth/github/callback";
 const GOOGLE = "/auth/google";
 const GOOGLE_CALLBACK = "/auth/google/callback";
 
+const NAVER = "/auth/naver";
+const NAVER_CALLBACK = "/auth/naver/callback";
+
 const API = "/api";
 const REGISTER_VIEW = "/:id/view";
 const ADD_COMMENT = "/:id/comment";
@@ -75,6 +78,8 @@ const routes = {
   githubCallback: GITHUB_CALLBACK,
   google: GOOGLE,
   googleCallback: GOOGLE_CALLBACK,
+  naver: NAVER,
+  naverCallback: NAVER_CALLBACK,
   me: ME,
   api: API,
   registerView: REGISTER_VIEW,
