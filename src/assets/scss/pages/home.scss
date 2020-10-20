@@ -1,7 +1,5 @@
 .home-videos {
   display: grid;
-  grid-template-columns: repeat(6, minmax(150px, 1fr));
-  .videoBlock {
-    margin-left: 30px;
-  }
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
+  gap: 40px;
 }

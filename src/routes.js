@@ -24,6 +24,9 @@ const DELETE_VIDEO = "/:id/delete";
 const GITHUB = "/auth/github";
 const GITHUB_CALLBACK = "/auth/github/callback";
 
+const GOOGLE = "/auth/google";
+const GOOGLE_CALLBACK = "/auth/google/callback";
+
 const API = "/api";
 const REGISTER_VIEW = "/:id/view";
 const ADD_COMMENT = "/:id/comment";
@@ -70,6 +73,8 @@ const routes = {
   },
   gitHub: GITHUB,
   githubCallback: GITHUB_CALLBACK,
+  google: GOOGLE,
+  googleCallback: GOOGLE_CALLBACK,
   me: ME,
   api: API,
   registerView: REGISTER_VIEW,
