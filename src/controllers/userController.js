@@ -20,6 +20,8 @@ export const postJoin = async (req, res, next) => {
       const user = await User({
         name,
         email,
+        avatarUrl:
+          "https://wetube-db.s3.ap-northeast-2.amazonaws.com/avatar/b7931644b2aad9f877aa6eef058b7e00",
       });
       await User.register(user, password);
       next();
@@ -55,6 +57,8 @@ export const naverLoginCallback = async (_, __, profile, cb) => {
       email,
       name,
       naverId: id,
+      avatarUrl:
+        "https://wetube-db.s3.ap-northeast-2.amazonaws.com/avatar/b7931644b2aad9f877aa6eef058b7e00",
     });
     return cb(null, newUser);
   } catch (error) {
@@ -161,7 +165,11 @@ export const userDetail = async (req, res) => {
   } = req;
   try {
     const user = await User.findById(id).populate("videos");
-    res.render("userDetail", { pageTitle: "User Detail", user });
+    res.render("userDetail", {
+      pageTitle: "User Detail",
+      user,
+      videos: user.videos,
+    });
   } catch (error) {
     req.flash("error", "User not found");
     res.redirect(routes.home);

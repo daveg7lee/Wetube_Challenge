@@ -169,7 +169,6 @@ export const postDelComment = async (req, res) => {
     } else {
       await Comment.deleteOne({
         text: comment,
-        creator: user.id,
       });
     }
     user.comments.remove(oldComment.id);
