@@ -32,7 +32,8 @@ block content
                 input(type="text", placeholder="Add a comment")
             ul.video__comments-list#jsCommentList
                 each comment in video.comments.reverse()
-                    li
-                        span=comment.text 
-                        if loggedUser && video.creator.id === loggedUser.id
+                    li  
+                        img(src=comment.creatorImg)
+                        span=comment.text
+                        if String(comment.creator) === loggedUser.id
                             button ❌

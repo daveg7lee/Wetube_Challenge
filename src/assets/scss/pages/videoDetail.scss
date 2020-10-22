@@ -55,8 +55,14 @@
         background-color: #3498db;
         color: white;
         padding: 15px;
-        border-radius: 20px;
-        border-bottom-left-radius: 0px;
+        border-radius: 25px;
+        img {
+          position: absolute;
+          left: 0;
+          width: 45px;
+          height: 45px;
+          border-radius: 50%;
+        }
         button {
           padding: 0;
           position: absolute;

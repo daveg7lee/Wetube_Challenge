@@ -9,17 +9,19 @@ const increaseNumber = () => {
   commentNumber.innerHTML = parseInt(commentNumber.innerHTML, 10) + 1;
 };
 
-const addComment = (comment) => {
+const addComment = (comment, data) => {
   const li = document.createElement("li");
   const span = document.createElement("span");
   const button = document.createElement("button");
+  const img = document.createElement("img");
   span.innerHTML = comment;
   button.innerHTML = "❌";
   button.addEventListener("click", sendDelComment);
+  img.src = data;
   li.appendChild(span);
   li.appendChild(button);
+  li.appendChild(img);
   commentList.prepend(li);
-  console.log(commentList);
   increaseNumber();
 };
 
@@ -54,8 +56,9 @@ const sendComment = async (comment) => {
       comment,
     },
   });
+  const data = response.data.userImg;
   if (response.status === 200) {
-    addComment(comment);
+    addComment(comment, data);
   }
 };
 
