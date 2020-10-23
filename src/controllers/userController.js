@@ -82,6 +82,7 @@ export const googleLoginCallback = async (_, __, profile, cb) => {
   try {
     const user = await User.findOne({ email });
     if (user) {
+      user.avatarUrl = avatarUrl;
       user.googleId = id;
       user.save();
       return cb(null, user);
@@ -120,6 +121,7 @@ export const githubLoginCallback = async (_, __, profile, cb) => {
   try {
     const user = await User.findOne({ email });
     if (user) {
+      user.avatarUrl = avatarUrl;
       user.githubId = id;
       user.save();
       return cb(null, user);
