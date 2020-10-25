@@ -1,6 +1,6 @@
 const path = require("path");
 const autoprefixer = require("autoprefixer");
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const MODE = process.env.WEBPACK_ENV;
 const ENTRY_FILE = path.resolve(__dirname, "assets", "js", "main.js");
 const OUTPUT_DIR = path.join(__dirname, "static");
@@ -9,22 +9,22 @@ const config = {
   mode: MODE,
   module: {
     rules: [
-        {
-            test: /\.(js)$/,
-            use: [
-              {
-                loader: "babel-loader"
-              }
-            ]
+      {
+        test: /\.(js)$/,
+        use: [
+          {
+            loader: "babel-loader",
           },
+        ],
+      },
       {
         test: /\.(scss)$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader
+            loader: MiniCssExtractPlugin.loader,
           },
           {
-            loader: "css-loader"
+            loader: "css-loader",
           },
           {
             loader: "postcss-loader",
@@ -32,34 +32,34 @@ const config = {
               postcssOptions: {
                 plugins: [
                   [
-                    'autoprefixer',
+                    "autoprefixer",
                     {
-                      browsers: "cover 99.5%"
+                      browsers: "cover 99.5%",
                     },
-                  ]
-                ]
-              }
-            }
+                  ],
+                ],
+              },
+            },
           },
           {
-            loader: "sass-loader"
-          }
-        ]
-      }
-    ]
+            loader: "sass-loader",
+          },
+        ],
+      },
+    ],
   },
   output: {
     path: OUTPUT_DIR,
-    filename: "[name].js"
+    filename: "[name].js",
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'styles.css'
+      filename: "styles.css",
     }),
   ],
   devServer: {
-    historyApiFallback: true
-  }
+    historyApiFallback: true,
+  },
 };
 
 module.exports = config;
